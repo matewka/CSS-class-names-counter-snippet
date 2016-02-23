@@ -1,1 +1,2 @@
 # CSS-class-names-counter-snippet
+This snippet helps you count all unique CSS class names occurences in a document. Just paste the contents of the classCounter.js file into the Chrome inspector console (or any other console you use in your browser) and hit enter. You will receive an object containing a list of unique class names with their occurrences count as well as an approximate byte saving in case of all the class names being minified to single-character names.
