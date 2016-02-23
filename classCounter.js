@@ -1,4 +1,7 @@
-var classesList = [], compression = 0,
+var classes = {
+  list: [],
+  compression: 0
+},
 _find = function (arr, name) {
   if (!name) {
     return null;
@@ -14,27 +17,26 @@ _find = function (arr, name) {
 };
 
 Array.from(document.querySelectorAll('[class]')).forEach(function (elem) {
-  var classes = (elem.getAttribute('class') || '').split(' ');
-  var found = null;
+  var elemClasses = (elem.getAttribute('class') || '').split(' '),
+    found = null;
 
-  for (var i = 0, n = classes.length; i < n; i++) {
-    found = _find(classesList, classes[i]);
+  for (var i = 0, n = elemClasses.length; i < n; i++) {
+    found = _find(classes.list, elemClasses[i]);
 
     if (found) {
       found.count = found.count + 1;
-    } else if (classes[i]) {
-      classesList.push({name: classes[i], count: 1});
+    } else if (elemClasses[i]) {
+      classes.list.push({name: elemClasses[i], count: 1});
     }
   }
 });
 
-classesList.sort(function (a, b) {
+classes.list.sort(function (a, b) {
   return b.count * b.name.length - a.count * a.name.length;
 });
 
-classesList.forEach(function (classItem) {
-  compression += (classItem.name.length - 2) * classItem.count;
+classes.list.forEach(function (classItem) {
+  classes.compression += (classItem.name.length - 2) * classItem.count;
 });
 
-classesList
-compression;
+classes;
